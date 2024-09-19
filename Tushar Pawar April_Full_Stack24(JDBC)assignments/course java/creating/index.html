@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+<h1>Paint Your Own Picture</h1>
+<p>
+    <input type="text" onchange="setWidth(this.value)" placeholder='enter size'/>
+    <input type="text" onchange="setHeight(this.value)" placeholder="enter size"/>
+</p>
+
+<canvas id="canvas1" onmousedown="startPaint()" onmousemove="doPaint(event.offsetX, event.offsetY)"
+        onmouseup="endPaint()">
+</canvas>
+<p>
+    Brush Color <input type="color" value="#000" onchange="changeColor(this.value)"/>
+</p>
+<p>
+    Brush size:
+    <input type="range" id="sizeInput" min="1" max="50" value="10" oninput="resizeBrush(this.value)">
+    <output id="sizeOutput">10</output>
+</p>
+<p>
+    <input type="button" id="clear" value="Clear Canvas" onclick="clearCanvas()">
+</p>
+
+
+</body>
+
+</html>

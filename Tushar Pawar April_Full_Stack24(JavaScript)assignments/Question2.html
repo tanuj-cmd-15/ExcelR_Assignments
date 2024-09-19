@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Array methods demonstration
+        let array = [1, 2, 3, 4, 5];
+
+        let joinedArray = array.join(", ");
+        console.log("Joined String: " + joinedArray);
+
+        array.push(6, 7);
+        console.log("After Push: ", array);
+
+        let mappedArray = array.map((x, index) => {
+            console.log(index + ":" + x);
+            return x + 3;
+        });
+        console.log("length: " + mappedArray.length);
+
+        array.pop();
+        console.log("After Pop: ", array);
+
+        array.shift();
+        console.log("After Shift: ", array);
+
+        array.unshift(0);
+        console.log("After Unshift: ", array);
+
+        let slicedArray = array.slice(1, 4);
+        console.log("Sliced Array: ", slicedArray);
+
+        array.splice(1, 2, 8, 9);
+        console.log("After Splice: ", array);
+
+        console.log("Index of 5: " + array.indexOf(5));
+
+        console.log("3 exists in array: " + array.includes(3));
+
+        array.reverse();
+        console.log("After Reverse: ", array);
+
+        array.sort((a, b) => a - b);
+        console.log("After Sort: ", array);
+
+        let str = "JavaScript is awesome!";
+
+        console.log("Uppercase: " + str.toUpperCase());
+
+        console.log("Lowercase: " + str.toLowerCase());
+
+        console.log("Length: " + str.length);
+
+        console.log("Index of 'is': " + str.indexOf('is'));
+
+        console.log("Substring: " + str.substring(4, 10));
+
+        let newStr = str.replace("awesome", "amazing");
+        console.log("Replaced String: " + newStr);
+
+        let splitStr = str.split(" ");
+        console.log("Split Array: ", splitStr);
+
+        splitStr.forEach((element, index) => {
+            console.log(index + ":" + element);
+        });
+        console.log("length: " + splitStr.length);
+    </script>
+</body>
+
+</html>

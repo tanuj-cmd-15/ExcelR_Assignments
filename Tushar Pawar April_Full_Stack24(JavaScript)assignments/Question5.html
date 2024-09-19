@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Number Swap</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 0px;
+        }
+        
+        .grid-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        
+        .grid-item:hover {
+            background-color: transparent rgb(255, 245, 245);
+        }
+        
+        .drag-over {
+            background-color: darkorange !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="grid-container" id="gridContainer">
+            <div class="grid-item" id="cell1" draggable="true" ondragstart="drag(event)">1</div>
+            <div class="grid-item" id="cell2" draggable="true" ondragstart="drag(event)">2</div>
+            <div class="grid-item" id="cell3" draggable="true" ondragstart="drag(event)">3</div>
+            <div class="grid-item" id="cell4" draggable="true" ondragstart="drag(event)">4</div>
+            <div class="grid-item" id="cell5" draggable="true" ondragstart="drag(event)">5</div>
+            <div class="grid-item" id="cell6" draggable="true" ondragstart="drag(event)">6</div>
+            <div class="grid-item" id="cell7" draggable="true" ondragstart="drag(event)">7</div>
+            <div class="grid-item" id="cell8" draggable="true" ondragstart="drag(event)">8</div>
+            <div class="grid-item" id="cell9" draggable="true" ondragstart="drag(event)">9</div>
+        </div>
+    </div>
+
+    <script>
+        let draggedItem = null;
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            draggedItem = event.target;
+        }
+
+        function dragEnter(event) {
+            if (event.target.classList.contains('grid-item')) {
+                event.target.classList.add('drag-over');
+            }
+        }
+
+        function dragLeave(event) {
+            if (event.target.classList.contains('grid-item')) {
+                event.target.classList.remove('drag-over');
+            }
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            if (draggedItem !== null && event.target.classList.contains('grid-item')) {
+
+                let temp = event.target.textContent;
+                event.target.textContent = draggedItem.textContent;
+                draggedItem.textContent = temp;
+
+
+                event.target.classList.remove('drag-over');
+
+                draggedItem = null;
+            }
+        }
+
+
+        const gridItems = document.querySelectorAll('.grid-item');
+        gridItems.forEach(item => {
+            item.addEventListener('dragover', allowDrop);
+            item.addEventListener('dragenter', dragEnter);
+            item.addEventListener('dragleave', dragLeave);
+            item.addEventListener('drop', drop);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 3fr;
+            grid-template-rows: auto;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .sidebar {
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .content {
+            background-color: #fff;
+            padding: 20px;
+        }
+        
+        header,
+        footer {
+            grid-column: 1;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>ExcelR FullStack APR 2024</h1>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Sidebar</h2>
+            <p> full-stack developer </p>
+        </div>
+        <div class="content">
+            <h2>Front End Developer</h2>
+            <p>Full-stack developers may be creative, graphically inclined, internet- and tech-savvy, and have excellent attention to detail. Front-end development is the process of creating the interface of a website. It entails coding details like drop-down
+                menus, fonts, colors, and page layouts. Full-stack developers should also know how to work with front-end technologies like HTML, CSS, and scripting languages such as JavaScript to make websites and applications visually viable and appealing.
+            </p>
+        </div>
+        <div class="sidebar">
+            <h2>Sidebar</h2>
+            <p>Back-end development skills entail using back-end programming languages like Python, PHP, Ruby on Rails, and CakePHP and understanding how algorithms and business logic work.Database management skills are required for full-stack developers,
+                though it is part of the skills needed for back-end web development. </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024</p>
+    </footer>
+</body>
+
+</html>

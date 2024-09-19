@@ -1,0 +1,41 @@
+<script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
+    var file;
+    var image;
+
+    function upload() {
+        var imgcanvas = document.getElementByID('can');
+        var fileinput = document.getElementById('finput');
+        image = new SimpleImage(fileinput);
+        image.drawTo(imgcanvas);
+        file = fileinput.files[0];
+        imgcanvas.width = image.getWidth();
+        imgcanvas.height = image.getHeight();
+        context.clearRect(0, 0, imgcanvas.width, imgcanvas.height);
+        context.drawImage(image, 0, 0);
+    }
+
+    function markGray() {
+        for
+        var pixel of image.values() {
+            var avg = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
+            pixel.setRed(avg);
+            pixel.setGreen(avg);
+            pixel.setBlue(avg);
+        }
+        var imgcanwas = document.getElementById('can')
+        image.drawTo(imgcanvas);
+    }
+
+</script>
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+
+</style>
+<h1> Upload and Display Image</h1>
+<canvas id="can" height='200' width='400'></canvas>
+<p>
+    <input type='file' id='finput' multiple='false' accept='image/*' onclick='upload()'>
+</p>
+<button onclick="makeGray()">Make Grayscale</button>

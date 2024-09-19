@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Function Declaration
+        function greetDeclaration(name) {
+            return `Hello, ${name} (Function Declaration)`;
+        }
+        console.log(greetDeclaration("Alice"));
+
+        // Function Expression
+        const greetExpression = function(name) {
+            return `Hello, ${name} (Function Expression)`;
+        };
+        console.log(greetExpression("Bob"));
+
+        // Arrow Function
+        const greetArrow = (name) => {
+            return `Hello, ${name} (Arrow Function)`;
+        };
+        console.log(greetArrow("Charlie"));
+
+        // Function Constructor
+        const greetConstructor = new Function('name', 'return `Hello, ${name} (Function Constructor)`;');
+        console.log(greetConstructor("Dave"));
+
+        // Immediately Invoked Function Expression (IIFE)
+        (function(name) {
+            console.log(`Hello, ${name} (IIFE)`);
+        })("Eve");
+
+        // Generator Function
+        function* greetGenerator() {
+            yield "Hello, World (Generator Function)";
+        }
+        const generator = greetGenerator();
+        console.log(generator.next().value);
+
+        // Function that returns another function
+        function createGreeter() {
+            return function(name) {
+                return `Hey, ${name} (Returned Function)`;
+            };
+        }
+        const returnedFunction = createGreeter();
+        console.log(returnedFunction("Frank"));
+
+        // Object Method
+        const obj = {
+            greet(name) {
+                return `Hello, ${name} (Object Method)`;
+            }
+        };
+        console.log(obj.greet("Grace"));
+    </script>
+</body>
+
+</html>

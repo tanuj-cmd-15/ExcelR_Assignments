@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 150px;
+            background-color: aqua;
+            font-weight: bold;
+            position: relative;
+            animation-name: demo;
+            animation-duration: 10s;
+            animation-fill-mode: forward;
+            margin-left: 500px;
+            animation: demo 5s linear 2s infininte alternate;
+        }
+        
+        @keyframes demo {
+            from {
+                left: -500px;
+            }
+            to {
+                left: 300px;
+            }
+            0% {
+                background-color: aqua
+            }
+            25% {
+                background-color: blue
+            }
+            50% {
+                background-color: violet
+            }
+            100% {
+                background-color: black
+            }
+        }
+        
+        #linear {
+            animation-timing-function: linear;
+        }
+        
+        #ease {
+            animation-timing-function: ease;
+        }
+        
+        #easein {
+            animation-timing-function: ease-in;
+        }
+        
+        #easeout {
+            animation-timing-function: ease-out;
+        }
+        
+        #easeinout {
+            animation-timing-function: ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="linear">
+        Linear
+    </div>
+    <div id="ease">Ease</div>
+    <div id="easein">Ease-in</div>
+    <div id="easeourt">ease-out</div>
+    <div id="easeinout">ease-in-out</div>
+</body>
+
+</html>

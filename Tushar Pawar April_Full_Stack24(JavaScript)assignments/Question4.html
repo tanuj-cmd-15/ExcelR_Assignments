@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .header {
+            margin-bottom: 0px;
+            font-size: 14px;
+            text-align: center;
+            color: #838181;
+        }
+        
+        .labels {
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            background-color: #222121;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .label {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+            color: rgb(126, 127, 127);
+        }
+        
+        .timer {
+            font-size: 10rem;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            color: rgb(255, 255, 255);
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            justify-content: space-around;
+            width: 100%;
+        }
+        
+        .control1,
+        .control2 {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            padding: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .control1 {
+            background-color: rgb(83, 83, 83);
+        }
+        
+        .control2 {
+            background-color: rgb(44, 185, 220);
+            border: none;
+            font-size: 40px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .buttons button {
+            flex: 1;
+            padding: 30px;
+            font-size: 30px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .reset {
+            background-color: #e86e0a;
+        }
+        
+        .start {
+            background-color: #32CD32;
+        }
+        
+        .stop {
+            background-color: #FF4500;
+            display: none;
+        }
+        
+        .reset-active {
+            background-color: #ee9b00 !important;
+            /* Yellow-Orange color */
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">Session</header>
+    <h1 class="timer">25:00</h1>
+    <div class="labels">
+        <div class="label">SESSION LENGTH</div>
+    </div>
+
+    <div class="controls">
+        <button class="control2" id="decrementSession">-</button>
+        <span class="control1" id="sessionLength">25</span>
+        <button class="control2" id="incrementSession">+</button>
+    </div>
+
+    <div class="labels">
+        <div class="label">BREAK LENGTH</div>
+    </div>
+
+    <div class="controls">
+        <button class="control2" id="decrementBreak">-</button>
+        <span class="control1" id="breakLength">5</span>
+        <button class="control2" id="incrementBreak">+</button>
+    </div>
+
+    <div class="buttons">
+        <button class="reset" disabled id="resetButton">Reset</button>
+        <button class="start" id="startButton">Start</button>
+        <button class="stop" id="stopButton">Stop</button>
+    </div>
+
+
+    <script>
+        let sessionLength = 25;
+        let breakLength = 5;
+        let timerInterval;
+        let isSession = true;
+        let timeRemaining = sessionLength * 60;
+
+        const timerDisplay = document.querySelector(".timer");
+        const startButton = document.getElementById("startButton");
+        const stopButton = document.getElementById("stopButton");
+        const resetButton = document.getElementById("resetButton");
+        const decrementSession = document.getElementById("decrementSession");
+        const incrementSession = document.getElementById("incrementSession");
+        const decrementBreak = document.getElementById("decrementBreak");
+        const incrementBreak = document.getElementById("incrementBreak");
+        const sessionLengthDisplay = document.getElementById("sessionLength");
+        const breakLengthDisplay = document.getElementById("breakLength");
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                if (timeRemaining === 0) {
+                    clearInterval(timerInterval);
+                    if (isSession) {
+                        isSession = false;
+                        timeRemaining = breakLength * 60;
+                        startTimer();
+                    } else {
+                        isSession = true;
+                        timeRemaining = sessionLength * 60;
+                        startTimer();
+                    }
+                }
+            }, 1000);
+
+            startButton.style.display = "none";
+            stopButton.style.display = "inline-block";
+            resetButton.classList.add("reset-active"); // Add class to change reset button color
+            resetButton.disabled = false;
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            startButton.style.display = "inline-block";
+            stopButton.style.display = "none";
+            resetButton.classList.remove("reset-active"); // Remove class if needed
+            resetButton.disabled = false;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = sessionLength * 60;
+            updateTimerDisplay();
+            startButton.style.display = "inline-block";
+            stopButton.style.display = "none";
+            startButton.disabled = false;
+            resetButton.classList.remove("reset-active"); // Remove class if needed
+            resetButton.disabled = true;
+        }
+
+        function updateSessionLength(value) {
+            sessionLength = value;
+            sessionLengthDisplay.textContent = sessionLength;
+            if (isSession) {
+                timeRemaining = sessionLength * 60;
+                updateTimerDisplay();
+            }
+        }
+
+        function updateBreakLength(value) {
+            breakLength = value;
+            breakLengthDisplay.textContent = breakLength;
+            if (!isSession) {
+                timeRemaining = breakLength * 60;
+                updateTimerDisplay();
+            }
+        }
+
+        decrementSession.addEventListener("click", () => {
+            if (sessionLength > 1) {
+                updateSessionLength(sessionLength - 1);
+            }
+        });
+
+        incrementSession.addEventListener("click", () => {
+            updateSessionLength(sessionLength + 1);
+        });
+
+        decrementBreak.addEventListener("click", () => {
+            if (breakLength > 1) {
+                updateBreakLength(breakLength - 1);
+            }
+        });
+
+        incrementBreak.addEventListener("click", () => {
+            updateBreakLength(breakLength + 1);
+        });
+
+        startButton.addEventListener("click", startTimer);
+        stopButton.addEventListener("click", stopTimer);
+        resetButton.addEventListener("click", resetTimer);
+
+        updateTimerDisplay();
+    </script>
+</body>
+
+</html>

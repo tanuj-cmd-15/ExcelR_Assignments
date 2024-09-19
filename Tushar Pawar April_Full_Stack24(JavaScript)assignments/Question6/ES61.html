@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 Features</title>
+</head>
+
+<body>
+    <script>
+        console.log();
+        console.log("****************** let variable and constant const ************** ")
+        let variable = 10; //let variable
+        if (true) {
+            let variable = 20; // let --> allows you to declare block-scoped variables
+            console.log("let variable block-scoped (inside blocked)", variable); // print --> 20
+        }
+        console.log("Outside blocked let variable", variable); // print --> 10
+
+        const constant = 30; // const variable --> it's allows you to declare block-scoped constants
+        console.log("constant", constant); // print --> 30
+        // constant = 40;                    // Error: Assignment to constant variable gives error for reassigning the constant
+
+
+        console.log();
+        console.log("**************** Arrow Function ********************")
+            //Arrow Function  --> (ES6 feature)
+        const y = (a, b) => a * b;
+        console.log("using Arrow Function", y(2, 3)); //6
+
+        const greet = name => `Hello, ${name}`;
+        console.log(greet('Alice')); // Hello, Alice
+
+
+
+        console.log();
+        console.log("**************** Rest & spread operator ********************")
+            // rest operator collects multiple elements into an array
+        function sum(...args) {
+            return args.reduce((acc, curr) => acc + curr, 0);
+        }
+        console.log(sum(1, 2, 3)); // 6
+
+        // Spread operator -the spread operatorspread elements of an array or object
+        const q1 = ["Jan", "Feb", "Mar"];
+        const q2 = ["APR", "May", "Jun"];
+        const q3 = ["July", "Aug", "Sep"];
+        const q4 = ["Oct", "Nov", "Dec"];
+
+        const Year1 = q1.concat(q2) //concat at a time 2 array only using concat
+        console.log(Year1);
+
+        const Year = [...q1, ...q2, ...q3, ...q4]; //concat aal four arrays
+        console.log(Year); // [ "Jan", "Feb", "Mar", "APR", "May", "Jun", "July", "Aug", "Sep", "Oct", … ]
+
+        //objects
+        const Student1 = {
+            firstname: "John",
+            lastName: "n",
+            age: 28,
+        };
+        const Student2 = {
+            RNo: 101,
+            Name: "tom",
+        };
+
+        const student = {...Student1,
+            ...Student2
+        };
+        console.log(student); //Object { firstname: "John", lastName: "n", age: 28, RNo: 101, Name: "tom" }
+
+
+
+        //Template literals allow for String imterpolation and multi-line strings
+        console.log();
+        console.log("**************** Template literals **********************");
+        const name = "john";
+        const greeting = `hello, ${name}!`;
+        console.log(greeting);
+
+        const multiline = `This is 
+         a multiline 
+         string. `
+        console.log(multiline);
+
+
+
+        console.log(); //default parameters allow you to set default values for function parameters
+        console.log("********** Default parameter ******************");
+
+        function multiply(a, b = 1) {
+            return a * b;
+        }
+        console.log(multiply(5)); // 5
+        console.log(multiply(5, 2)); // 10
+
+
+        console.log();
+        console.log("******************* Map & Set Objects ***************************");
+        const map = new Map();
+        map.set('key1', 'value1');
+        map.set('key2', 'value2');
+        console.log("map object", map.get('key1'));
+
+        const letters = new Set(); // Create a Set
+        letters.add("a");
+        letters.add("b");
+        letters.add("c"); // Add some values to the Set
+
+        console.log("set", letters);
+
+
+        console.log(); // class are provide convienient way for creating object and handling inheritance
+        console.log("*********************** Classes ***********************");
+        class Person {
+            constructor(name) {
+                this.name = name;
+            }
+            greet() {
+                return `Hello, ${this.name}`;
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, studentId) {
+                super(name);
+                this.studentId = studentId;
+            }
+            getStudentId() {
+                return this.studentId;
+            }
+        }
+
+        const student1 = new Student('Bob', 123);
+        console.log(student1.greet()); // Hello, Bob
+        console.log(student1.getStudentId()); // 123
+
+
+        console.log();
+        console.log("*** StringIncludes, Startswith, endswith**** ");
+        // includes()
+        const sentence = "The quick brown fox jumps over the lazy dog.";
+        const word = "fox";
+
+        console.log(`Does the sentence include the word '${word}'? ${sentence.includes(word)}`);
+
+
+        // startsWith()
+        const str = "Hello, world!";
+        const prefix = "Hello";
+
+        console.log(`Does the string start with '${prefix}'? ${str.startsWith(prefix)}`);
+
+        // endsWith()
+        const suffix = "world!";
+        console.log(`Does the string end with '${suffix}'? ${str.endsWith(suffix)}`);
+
+
+        console.log();
+        console.log("*************** Array Methods ********************");
+        // Array.entries()
+        const array1 = ['a', 'b', 'c'];
+        const entries = array1.entries();
+        console.log('Array.entries():');
+        for (const [index, element] of entries) {
+            console.log(index, element); // 0 'a', 1 'b', 2 'c'
+        }
+
+        // Array.from() 
+        const set = new Set([1, 2, 3]);
+        const array2 = Array.from(set);
+        console.log('Array.from():');
+        console.log(array2); // [1, 2, 3]
+
+        // Array.keys()
+        const array3 = ['a', 'b', 'c'];
+        const keys = array3.keys();
+        console.log('Array.keys():');
+        for (const key of keys) {
+            console.log(key); // 0, 1, 2
+        }
+
+        // Array.find()
+        const array4 = [5, 12, 8, 130, 44];
+        const found = array4.find(element => element > 10);
+        console.log('Array.find():');
+        console.log(found); // 12
+
+        // Array.findIndex()
+        const array5 = [5, 12, 8, 130, 44];
+        const foundIndex = array5.findIndex(element => element > 10);
+        console.log('Array.findIndex():');
+        console.log(foundIndex); // 1
+
+        // Array.forEach()
+        const array6 = ['a', 'b', 'c'];
+        console.log('Array.forEach():');
+        array6.forEach(element => console.log(element)); // 'a', 'b', 'c'
+
+        // Array.map()
+        const array7 = [1, 2, 3];
+        const mappedArray = array7.map(x => x * 2);
+        console.log('Array.map():');
+        console.log(mappedArray); // [2, 4, 6]
+
+        // Array.every()
+        const array8 = [1, 30, 39, 29, 10, 13];
+        const isBelow40 = array8.every(element => element < 40);
+        console.log('Array.every():');
+        console.log(isBelow40); // true
+
+        // Array.some()
+        const array9 = [1, 2, 3, 4, 5];
+        const hasEvenNumber = array9.some(element => element % 2 === 0);
+        console.log('Array.some():');
+        console.log(hasEvenNumber); // true
+
+        // Array.reduce()
+        const array10 = [1, 2, 3, 4];
+        const sum1 = array10.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        console.log('Array.reduce():');
+        console.log(sum1); // 10
+
+
+        console.log();
+        console.log("*********************** Promises **********************");
+        const asyncOperation = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('Operation successful');
+            }, 1000);
+        });
+
+        asyncOperation
+            .then(response => console.log(response)) // Operation successful
+            .catch(error => console.error(error));
+    </script>
+</body>
+
+</html>
